@@ -1,0 +1,30 @@
+USE [Crypto]
+GO
+
+/****** Object:  Table [dbo].[Transactions]    Script Date: 23/06/2019 11:26:25 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Transactions](
+	[TxID] [int] IDENTITY(1,1) NOT NULL,
+	[TransactionDate] [datetime2](7) NOT NULL,
+	[Type] [nvarchar](50) NOT NULL,
+	[Pair] [nvarchar](50) NOT NULL,
+	[Coin1] [nvarchar](50) NOT NULL,
+	[Coin2] [nvarchar](50) NOT NULL,
+	[Amount] [float] NOT NULL,
+	[RateInclFee] [float] NOT NULL,
+	[RateExclFee] [float] NOT NULL,
+	[Fee] [float] NOT NULL,
+	[FeeUnit] [nvarchar](50) NOT NULL,
+	[GST] [float] NOT NULL,
+	[Total_AUD] [float] NOT NULL,
+	[TotalCoinExclGST] [float] NOT NULL,
+	[TotalInclGSTUnit] [nvarchar](50) NOT NULL
+) ON [PRIMARY]
+GO
+
+
