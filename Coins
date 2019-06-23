@@ -1,0 +1,21 @@
+USE [Crypto]
+GO
+
+/****** Object:  Table [dbo].[Coins]    Script Date: 23/06/2019 11:28:28 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Coins](
+	[CoinIdx] [int] IDENTITY(1,1) NOT NULL,
+	[Coin] [nvarchar](16) NULL,
+UNIQUE NONCLUSTERED 
+(
+	[Coin] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
