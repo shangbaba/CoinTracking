@@ -1,0 +1,32 @@
+USE [Crypto]
+GO
+
+/****** Object:  StoredProcedure [dbo].[speg_TxTableCreation]    Script Date: 23/06/2019 11:30:07 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE procedure [dbo].[speg_TxTableCreation] 
+as
+
+truncate table transactions
+
+insert into Transactions ([TransactionDate],
+	[Type],
+	[Pair],
+	[Coin1],
+	[Coin2],
+	[Amount],
+	[RateInclFee],
+	[RateExclFee],
+	[Fee],
+	[FeeUnit],
+	[GST],
+	[Total_AUD],
+	[TotalCoinExclGST],
+	[TotalInclGSTUnit])
+select * from rawTransformed
+GO
+
