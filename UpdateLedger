@@ -1,0 +1,27 @@
+USE [Crypto]
+GO
+
+/****** Object:  StoredProcedure [dbo].[speg_UpdateLedger]    Script Date: 23/06/2019 11:31:37 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[speg_UpdateLedger]
+as
+insert into Ledger (TxID, TxDate, Coin, Debit)
+select TxID, transactiondate, coin1, amount from Transactions where type = 'Buy'
+
+
+insert into Ledger (TxID, TxDate, Coin, Credit)
+select TxID, transactiondate, coin2, TotalCoinExclGST from Transactions where type = 'Buy'
+
+
+insert into Ledger (TxID, TxDate, Coin, Credit)
+select TxID, transactiondate, coin1, amount from Transactions where type = 'Sell'
+
+insert into Ledger (TxID, TxDate, Coin, Debit)
+select TxID, transactiondate, coin2, TotalCoinExclGST from Transactions where type = 'Sell'
+GO
+
