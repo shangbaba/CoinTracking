@@ -1,0 +1,42 @@
+USE [Crypto]
+GO
+
+/****** Object:  StoredProcedure [dbo].[speg_UpdateCoins]    Script Date: 23/06/2019 11:30:58 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[speg_UpdateCoins]
+AS
+
+WITH Coin1InTx AS (
+SELECT distinct(Coin1) as Coin
+FROM Transactions p
+)
+
+MERGE Coins AS TARGET
+USING Coin1InTx AS SOURCE ON TARGET.Coin = SOURCE.Coin
+
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT (Coin)
+	VALUES (SOURCE.Coin)
+OUTPUT $action,
+	INSERTED.Coin as CoinAdded;
+
+WITH Coin2InTx AS (
+SELECT distinct(Coin2) as Coin
+FROM Transactions p
+)
+
+MERGE Coins AS TARGET
+USING Coin2InTx AS SOURCE ON TARGET.Coin = SOURCE.Coin
+
+WHEN NOT MATCHED BY TARGET THEN
+	INSERT (Coin)
+	VALUES (SOURCE.Coin)
+OUTPUT $action,
+	INSERTED.Coin as CoinAdded;
+GO
+
